@@ -22,7 +22,7 @@ public class Client {
             out = new DataOutputStream(clientSocket.getOutputStream());
             in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
         } 
-        catch (IOException e) { // if cannot connect, tell user.
+        catch (IOException e) { // if cannot connect, tell user and try again
             JOptionPane.showMessageDialog(null,"Currently waiting for connection");
             startConnection();
         }
@@ -30,10 +30,10 @@ public class Client {
     
     public void sendNumbers(int[] lotNumbers){        
         try {
-            for (int i = 0; i <=5;i++){
+            for (int i = 0; i <=5;i++){ // for size of the array, write the numbers to the server
                 out.writeInt(lotNumbers[i]);
             }
-        } 
+        }
         catch (IOException ex) {
         }
     }
@@ -78,13 +78,17 @@ public class Client {
     }    
 
     public void getNumbers(){
-        SpinnerNumberModel sModel1 = new SpinnerNumberModel(1, 1, 50, 1);SpinnerNumberModel sModel2 = new SpinnerNumberModel(1, 1, 50, 1);SpinnerNumberModel sModel3 = new SpinnerNumberModel(1, 1, 50, 1);SpinnerNumberModel sModel4 = new SpinnerNumberModel(1, 1, 50, 1);SpinnerNumberModel sModel5 = new SpinnerNumberModel(1, 1, 50, 1);SpinnerNumberModel sModel6 = new SpinnerNumberModel(1, 1, 50, 1); // Create models for jSpinners to use (number between 1-50)
+        SpinnerNumberModel sModel1 = new SpinnerNumberModel(1, 1, 50, 1);SpinnerNumberModel sModel2 = new SpinnerNumberModel(2, 1, 50, 1);SpinnerNumberModel sModel3 = new SpinnerNumberModel(3, 1, 50, 1);SpinnerNumberModel sModel4 = new SpinnerNumberModel(4, 1, 50, 1);SpinnerNumberModel sModel5 = new SpinnerNumberModel(5, 1, 50, 1);SpinnerNumberModel sModel6 = new SpinnerNumberModel(6, 1, 50, 1); // Create models for jSpinners to use (number between 1-50)
+        
         JSpinner spinner1 = new JSpinner(sModel1);JSpinner spinner2 = new JSpinner(sModel2);JSpinner spinner3 = new JSpinner(sModel3);JSpinner spinner4 = new JSpinner(sModel4);JSpinner spinner5= new JSpinner(sModel5);JSpinner spinner6= new JSpinner(sModel6); // Create jSpinners for use within JOptionPane
+        
         Object[] message = { "Number 1:", spinner1,"Number 2:", spinner2,"Number 3:", spinner3,"Number 4:", spinner4,"Number 5:", spinner5,"Number 6",spinner6}; // Construct structure for JOptionPane
+        
         int option = JOptionPane.showOptionDialog(null, message, "Lottery! Enter 6 numbers", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null); // Display OptionDialog and get option from user (OK, cancel, close)
         switch (option) {
             case JOptionPane.OK_OPTION: // if user presses ok, get values from spinners and create array with them
                 int lotNumber1 = (int)spinner1.getValue();int lotNumber2 = (int)spinner2.getValue();int lotNumber3 = (int)spinner3.getValue();int lotNumber4 = (int)spinner4.getValue();int lotNumber5 = (int)spinner5.getValue();int lotNumber6 = (int)spinner6.getValue();
+                
                 int[] lotNumbers = {lotNumber1,lotNumber2,lotNumber3,lotNumber4,lotNumber5,lotNumber6};
                 sendNumbers(lotNumbers);
                 break;
@@ -109,5 +113,3 @@ public class Client {
             System.exit(0);
         } 
     }
-
-
