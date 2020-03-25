@@ -116,7 +116,6 @@ public class Client {
     }
     
     public void getPasswordAndCheckIfValid(){
-        
         try {
             JPasswordField passwordField = new JPasswordField(10);
             int passwordDialog = JOptionPane.showConfirmDialog(null,passwordField,"Enter Pass (Default: lottery)",JOptionPane.OK_CANCEL_OPTION); // create confirm dialog for password entering (default password lottery)
@@ -144,7 +143,7 @@ public class Client {
             Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
+    
     public static void main(String args []){
         Client client = new Client();
         client.getPasswordAndCheckIfValid();

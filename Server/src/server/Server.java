@@ -22,7 +22,7 @@ public class Server {
             ClientServiceThread cliThread = new ClientServiceThread(clientSocket, id++);
             cliThread.start();
         }
-    }   
+    }
 }
 
 class ClientServiceThread extends Thread{ // thread client info
@@ -34,7 +34,6 @@ class ClientServiceThread extends Thread{ // thread client info
         clientSocket = s;
         clientID = 1;
     }
-    
     @Override
     public void run(){ //runs when thread starts/user connected
         System.out.println("A client has connected");
